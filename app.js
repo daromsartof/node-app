@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', require('./routes/auth'));
+app.use('/', require('./routes/frontOffice'));
 
 
 // catch 404 and forward to error handler

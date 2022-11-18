@@ -1,15 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
+const {AuthControllers} = require('../src/controllers/auth-controller'); 
 /* POST login page. */
 router.post('/login', function (req, res, next) {
     res.send('post login')
 });
 
 /* GET login page. */
-router.get('/login', function (req, res, next) {
-    res.render('./auth/index', { title: 'login' });
-});
+router.get('/login', AuthControllers.login);
 
 /* POST register page. */
 router.post('/register', function (req, res, next) {
@@ -18,9 +16,7 @@ router.post('/register', function (req, res, next) {
 
 
 /* GET register page. */
-router.get('/register', function (req, res, next) {
-    res.render('./auth/resister', { title: 'resister' });
-});
+router.get('/register', AuthControllers.register);
 
 
 
