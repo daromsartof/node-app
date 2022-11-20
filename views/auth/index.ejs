@@ -8,7 +8,13 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-
+    <form action="/login" method="post">
+      <label for="userName">userName</label>
+      <input type="email" name="userName" id="userName">
+      <label for="password">password</label>
+      <input type="text" name="password" id="password">
+      <input type="submit" value="connecter">
+    </form>
 
     <%- include('../parcial/javascript/global') -%>
   </body>

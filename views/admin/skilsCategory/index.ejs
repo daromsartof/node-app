@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <ul>
+        <% data.map(function(portfolio) { %>
+            <%= portfolio.usprTitle %>
+            <a href="/admin/portfolio/edit/<%= portfolio.id %>">edit</a>
+        <% }) %>
+    </ul>
+
+    <a href="/admin/portfolio/add">ajouter</a>
+  </body>
+</html>

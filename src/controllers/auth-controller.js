@@ -1,11 +1,23 @@
+const { method } = require("../utils/constant");
+
 /**
  * @param {import("express").Request} req
  * @param {import("express").Response} res
  */
 const login = async(req, res) => {
-   res.render('./auth/index', { title: 'login' });
+    //if (req.method == method.get) {
+        res.render('./auth/index', { title: 'login' });     
+   // }
+    // res.json(JSON.stringify(req.body));
 }
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
+const fecthLogin = async(req, res) => {
+    res.json(JSON.stringify(req.body));
+}
 
 /**
  * @param {import("express").Request} req
@@ -17,6 +29,7 @@ const register = async(req, res) => {
 
 exports.AuthControllers = {
     register,
-    login
+    login ,
+    fecthLogin
 }
 
