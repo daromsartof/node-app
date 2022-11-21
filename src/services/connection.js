@@ -1,7 +1,6 @@
 const { default: mongoose } = require("mongoose");
-const { constant } = require("../utils/constant");
-
-mongoose.connect(`mongodb+srv://${constant.user}:${constant.mdp}@cluster0.ouzsftf.mongodb.net/?retryWrites=true&w=majority`);
+require('dotenv').config()
+mongoose.connect(process.env.MONGOS_DB);
 const db = mongoose.connection
 db.on('error', () => {
   console.error('error connection');

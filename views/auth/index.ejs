@@ -8,14 +8,35 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    <form action="/login" method="post">
+    <form action="#" method="post">
       <label for="userName">userName</label>
       <input type="email" name="userName" id="userName">
       <label for="password">password</label>
       <input type="text" name="password" id="password">
-      <input type="submit" value="connecter">
+      <button onClick = "login(event)"> Login </button>
     </form>
 
     <%- include('../parcial/javascript/global') -%>
+    <script>
+      const login = e =>{
+          e.preventDefault();
+          const userName = document.getElementById('userName').value;
+          const password = document.getElementById('password').value;
+          const option = {
+              headers:{
+                  "Content-Type": "application/json"
+              },
+              method: "POST",
+              body: JSON.stringify({
+                  userName: userName,
+                  password: password
+              }),
+              redirect: "follow"
+          }    
+          fetch(`/login`, option)
+              .then(res => res.redirected && ( location.href = res.url ))
+              .catch(err => alert('Something happen wrong!'));
+      }
+    </script>
   </body>
 </html>

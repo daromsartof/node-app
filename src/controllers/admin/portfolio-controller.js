@@ -1,4 +1,3 @@
-const { portfolio } = require("../../models/portfolio");
 const { portfolioEntity } = require("../../models/portfolioEntity");
 const { method, path } = require("../../utils/constant");
 /**
@@ -16,7 +15,7 @@ const index = async (req, res) => {
  * @param {import("express").Request} req
  * @param {import("express").Response} res
  */
-const add = async (req, res , next) => {
+const add = async (req, res, next) => {
     res.render('./admin/portfolio/add', { title: 'admin potfolio add', path: path });
     if (req.method == method.post) {
         const data = req.body;
@@ -28,17 +27,9 @@ const add = async (req, res , next) => {
         })
         porfolio.save((err) => {
             if (err) return res.status(500).send('ERROR');
-            // res.redirect(
-            //     '../'
-            // )
-           // res.redirect('/admin/portfolio')
         })
-        // res.setHeader("Content-Type", "text/html")
-        // res.redirect('/admin/portfolio')
-        // next()
     }
     next()
-    //res.json(JSON.stringify(req.body))
 }
 
 
@@ -74,7 +65,7 @@ const edit = async (req, res) => {
 const remove = async (req, res) => {
     if (!req.params.id) res.status(404).send('portfolio not found')
     const response = await portfolioEntity.deleteOne({
-        _id : req.params.id
+        _id: req.params.id
     })
     if (response.deletedCount == 1) res.redirect('/admin/portfolio')
     else res.status(500).send('ERROR')

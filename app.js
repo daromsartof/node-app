@@ -8,29 +8,17 @@ const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 var app = express();
-const { default: mongoose } = require('mongoose');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const db = require('./src/services/connection');
-
-
-// const instance = new model({
-//   usprTitle : 'ghgdshgq',
-//   usprDescription : 'sdfsgdhfg',
-//   usprImagePath: 'sdfjhsghjdf'
-// })
-
-
-// instance.save(function (err) {
-//   console.log(err);
-//})
-
+require('./src/services/connection');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(cors());
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
@@ -49,6 +37,7 @@ app.use('/admin' , require('./routes/backOffice'));
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -1,8 +1,3 @@
-const config = {
-   user : 'daroms',
-   mdp  : 'rP2rBA9RN8-jPmB'
-}
-
 const method = {
    get : "GET",
    post : "POST",
@@ -20,5 +15,4 @@ const path = {
    }
 }
 exports.path     = path
-exports.constant = { ...config  }
 exports.method   = method

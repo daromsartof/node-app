@@ -1,0 +1,1 @@
+MONGOS_DB = "mongodb+srv://daroms:rP2rBA9RN8-jPmB@cluster0.ouzsftf.mongodb.net/?retryWrites=true&w=majority"
