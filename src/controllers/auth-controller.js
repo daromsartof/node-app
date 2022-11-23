@@ -17,7 +17,6 @@ const login = async (req, res) => {
 const fecthLogin = async (req, res) => {
     const data = req.body
     if (!data) res.status(401).end()
-    console.log(data);
     userEntity.findOne({
         userName: data.userName
     }, async (err, docs) => {
@@ -33,7 +32,7 @@ const fecthLogin = async (req, res) => {
     })
 }
 
-exports.AuthControllers = {
+module.exports = {
     login,
     fecthLogin
 }

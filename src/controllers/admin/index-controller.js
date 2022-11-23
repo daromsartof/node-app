@@ -7,7 +7,7 @@
 }
 
 
-exports.adminController = {
+module.exports = {
     index
 }
 

@@ -7,7 +7,7 @@
 }
 
 
-exports.aboutControllers = {
+module.exports = {
     index
 }
 

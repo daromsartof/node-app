@@ -7,7 +7,7 @@
 }
 
 
-exports.portfolioControllers = {
+module.exports = {
     index
 }
 

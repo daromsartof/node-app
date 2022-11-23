@@ -1,5 +1,5 @@
 const { portfolioEntity } = require("../../models/portfolioEntity");
-const { method, path } = require("../../utils/constant");
+const { method, path } = require("../../utils/constant")
 /**
  * @param {import("express").Request} req
  * @param {import("express").Response} res
@@ -15,21 +15,27 @@ const index = async (req, res) => {
  * @param {import("express").Request} req
  * @param {import("express").Response} res
  */
-const add = async (req, res, next) => {
+const renderAddPortfolio = async (req, res, next) => {
     res.render('./admin/portfolio/add', { title: 'admin potfolio add', path: path });
-    if (req.method == method.post) {
-        const data = req.body;
-        if (!data) return res.status(401).render('./admin/portfolio/add', { title: 'admin potfolio add', path: path });
-        const porfolio = new portfolioEntity({
-            usprTitle: data.title,
-            usprDescription: data.description,
-            usprImagePath: 'image url'
-        })
-        porfolio.save((err) => {
-            if (err) return res.status(500).send('ERROR');
-        })
-    }
-    next()
+}
+
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
+const addPortfolio = async (req, res) => {
+    const data = req.body;
+    if (!data) return res.redirect(300, '');
+    console.log(req.files);
+    const porfolio = new portfolioEntity({
+        usprTitle: data.title,
+        usprDescription: data.description,
+        usprImagePath: 'image url'
+    })
+    porfolio.save((err) => {
+        if (err) return res.status(500).send('ERROR');
+        res.redirect(301, path.portfolio.index)
+    })
 }
 
 
@@ -37,26 +43,32 @@ const add = async (req, res, next) => {
  * @param {import("express").Request} req
  * @param {import("express").Response} res
  */
-const edit = async (req, res) => {
-
+const renderEditPortfolio = async (req, res) => {
     if (!req.params.id) res.status(404).send('portfolio not found')
     portfolioEntity.findById(req.params.id, async (err, docs) => {
         if (err) res.status(500).send('ERROR')
         res.render('./admin/portfolio/edit', { title: 'edit', data: docs, path: path });
     })
-
-    if (req.method == method.post) {
-        const data = req.body;
-        if (!data) return res.render('./admin/portfolio/edit', { title: 'edit', data: docs, path: path });
-        const response = await portfolioEntity.updateOne({
-            _id: req.params.id
-        }, {
-            usprTitle: data.title,
-            usprDescription: data.description,
-            usprImagePath: 'image url'
-        })
-    }
 }
+
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
+const editPortfolio = async (req, res) => {
+    if (!req.params.id) res.status(404).send('portfolio not found')
+    const data = req.body;
+    if (!data) return res.render('./admin/portfolio/edit', { title: 'edit', data: docs, path: path });
+    const {modifiedCount} = await portfolioEntity.updateOne({
+        _id: req.params.id
+    }, {
+        usprTitle: data.title,
+        usprDescription: data.description,
+        usprImagePath: 'image url'
+    })
+    if (modifiedCount) res.redirect(302, path.portfolio.index)
+}
+
 
 /**
  * @param {import("express").Request} req
@@ -72,10 +84,12 @@ const remove = async (req, res) => {
 }
 
 
-exports.adminPortfolioController = {
+module.exports= {
     index,
-    add,
-    edit,
+    renderAddPortfolio,
+    addPortfolio,
+    renderEditPortfolio,
+    editPortfolio,
     remove
 }
 

@@ -7,7 +7,7 @@
 }
 
 
-exports.resumeControllers = {
+module.exports = {
     index
 }
 

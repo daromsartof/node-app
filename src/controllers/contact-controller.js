@@ -7,7 +7,7 @@
 }
 
 
-exports.contactControllers = {
+module.exports = {
     index
 }
 

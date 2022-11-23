@@ -7,6 +7,7 @@ const method = {
 
 const path = {
    index : '/',
+   admin : '/admin',
    portfolio : {
        index : '/admin/portfolio',
        add   : '/admin/portfolio/add',

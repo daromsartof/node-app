@@ -4,16 +4,17 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
-const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
 var app = express();
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 
 require('./src/services/connection');
 app.use(logger('dev'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -27,11 +28,9 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/', require('./routes/auth'));
-app.use('/', require('./routes/frontOffice'));
-app.use('/admin' , require('./routes/backOffice'));
+app.use(fileUpload());
+app.use('/', require('./src/routes/frontOffice'));
+app.use('/admin' , require('./src/routes/backOffice'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,7 +7,7 @@
 }
 
 
-exports.indexControllers = {
+module.exports = {
     index
 }
 
