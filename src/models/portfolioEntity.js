@@ -6,6 +6,6 @@ const shema = mongoose.Schema({
     usprImagePath:String
   })
   
-const model = mongoose.model('portfolio',shema)
+const portfolioEntity = mongoose.model('portfolio',shema)
 
-exports.portfolioEntity = model
+module.exports = portfolioEntity

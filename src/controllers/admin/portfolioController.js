@@ -1,4 +1,4 @@
-const { portfolioEntity } = require("../../models/portfolioEntity");
+const  portfolioEntity  = require("../../models/portfolioEntity");
 const { method, path } = require("../../utils/constant")
 /**
  * @param {import("express").Request} req
@@ -25,8 +25,7 @@ const renderAddPortfolio = async (req, res, next) => {
  */
 const addPortfolio = async (req, res) => {
     const data = req.body;
-    if (!data) return res.redirect(300, '');
-    console.log(req.files);
+    if (!data) return res.redirect(300, '/');
     const porfolio = new portfolioEntity({
         usprTitle: data.title,
         usprDescription: data.description,

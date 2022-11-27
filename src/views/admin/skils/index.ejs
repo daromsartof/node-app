@@ -7,12 +7,18 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <ul>
-        <% data.map(function(portfolio) { %>
-            <%= portfolio.usprTitle %>
-            <a href="/admin/portfolio/edit/<%= portfolio.id %>">edit</a>
+        <% data.map(function(skils) { %>
+            <li><%= skils.uskCatTitle %>
+              <ul>
+                <% skils.userSkils.map(function(skil) { %> 
+                  <li><%= skil.uskTitle %><%= skil.uskValue %></li>  
+                <%})%>
+              </ul>
+              <a href="/admin/skils/edit/<%= skils.id %>">edit</a>
+            </li>
         <% }) %>
     </ul>
 
-    <a href="/admin/portfolio/add">ajouter</a>
+    <a href="/admin/skils/add">ajouter</a>
   </body>
 </html>

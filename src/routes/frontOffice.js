@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const { index } = require('../controllers/index-controller');
-const { index: indexAbout } = require('../controllers/about-controller');
-const { index: indexContact } = require('../controllers/contact-controller');
-const { index: indexPortfolio } = require('../controllers/portfolio-controller');
-const { index: indexResume } = require('../controllers/resume-controller');
-const { login, fecthLogin } = require('../controllers/auth-controller');
+const { index } = require('../controllers/indexController');
+const { index: indexAbout } = require('../controllers/aboutController');
+const { index: indexContact } = require('../controllers/contactController');
+const { index: indexPortfolio } = require('../controllers/portfolioController');
+const { index: indexResume } = require('../controllers/resumeController');
+const { login, fecthLogin } = require('../controllers/authController');
 
 router.get('/', index);
 router.get('/about', indexAbout);
