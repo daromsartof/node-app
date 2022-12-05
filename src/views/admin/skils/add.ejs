@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <form action="<%= path.portfolio.add %>" method="post">
-        <label for="title">title</label>
-        <input type="text" name="title" id="title">
-        <label for="description">description</label>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea>
-        <input type="submit" value="add">
-    </form>
-    <a href="<%= path.portfolio.index %>">retour</a>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to <%= title %>
+  </p>
+  <form action="<%= path.skils.add %>" method="post" encType="multipart/form-data">
+    <label for="uskCatTitle">Categorie title</label>
+    <input type="text" name="title" id="title">
+    <h2>Skils</h2>
+    <div id="skils">
+      <div>
+        <label for="uskTitle[]">Skils title</label>
+        <input type="text" name="uskTitle[]" id="uskTitle">
+        <label for="uskValue[]">Value</label>
+        <input type="number" name="uskValue[]" id="uskValue">
+        <label for="uskImageUrl[]">Categorie title</label>
+        <input type="file" name="uskImageUrl[]" id="uskImageUrl">
+      </div>
+
+    </div>
+    <div class="js-more-skils">+</div>
+    <input type="submit" value="add">
+  </form>
+  <a href="<%= path.skils.index %>">retour</a>
+
+  <%- include('../../parcial/javascript/global') -%>
+  <script>
+    $(document).ready(function(){
+      var input = $('#skils')
+      var child = '<div>' + input.html() + '<div class="js-remove-skils">-</div></div>';
+      $('.js-more-skils').click(function(){
+          input.append(child)
+          $(".js-remove-skils").click(function (e) {
+            $(this).parent().remove()
+          })
+      })
+    });
+  </script>
+</body>
+
 </html>

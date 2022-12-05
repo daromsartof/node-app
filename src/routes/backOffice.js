@@ -1,5 +1,7 @@
 var express = require('express');
 const { index:indexAdmin } = require('../controllers/admin/indexController');
+
+const { index:indexCivils, updateCivil } = require('../controllers/admin/civilsConstroller');
 const {
     index,
     renderAddPortfolio,
@@ -8,6 +10,7 @@ const {
     editPortfolio,
     remove
 } = require('../controllers/admin/portfolioController');
+
 const { 
     index:indexSkils,
     renderAddSkils, 
@@ -35,4 +38,8 @@ router.post('/skils/add' , addSkils);
 router.get('/skils/edit/:id', renderEditSkils);
 router.post('/skils/edit/:id', editSkils);
 router.get('/skils/delete/:id', rmSkils);
+
+router.get('/civils', indexCivils);
+router.post('/civils', updateCivil);
+
 module.exports = router;

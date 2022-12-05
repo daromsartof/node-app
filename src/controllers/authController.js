@@ -1,6 +1,6 @@
-const { userEntity } = require("../models/userEntity");
 const { method } = require("../utils/constant");
 const bcrypt = require('bcrypt');
+const userEntity = require("../models/userEntity");
 
 /**
  * @param {import("express").Request} req

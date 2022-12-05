@@ -41,6 +41,6 @@ const shema = mongoose.Schema({
     role: [String]
 })
 
-const model = mongoose.model('user', shema)
+const userEntity = mongoose.model('user', shema)
 
-exports.userEntity = model
+module.exports = userEntity

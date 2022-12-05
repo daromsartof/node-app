@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+
+  <% if (typeof message=="string" ) { %>
+    <h2>
+      <%= message %>
+    </h2>
+    <% } %>
+
+      <p>Welcome to <%= title %>
+      </p>
+      <form method="post" id="formCivil">
+        <label for="biographie">biographie</label>
+        <input type="text" value="<%= data.civil.biographie %>" name="biographie" id="biographie">
+        <label for="city">city</label>
+        <input type="text" value="<%= data.civil.city %>" name="city" id="city">
+        <label for="degree">degree</label>
+        <input type="text" value="<%= data.civil.degree %>" name="degree" id="degree">
+        <label for="firstName">firstName</label>
+        <input type="text" value="<%= data.civil.firstName %>" name="firstName" id="firstName">
+        <label for="name">name</label>
+        <input type="text" value="<%= data.civil.name %>" name="name" id="name">
+        <label for="phone">phone</label>
+        <input type="text" value="<%= data.civil.phone %>" name="phone" id="phone">
+        <label for="profession">profession</label>
+        <input type="text" value="<%= data.civil.profession %>" name="profession" id="profession">
+        <label for="profilsPath">profilsPath</label>
+        <input type="file" value="<%= data.civil.profilsPath %>" name="profilsPath" id="profilsPath">
+        <div>
+          <h3>Social</h3>
+          <div class="social-js">
+            <% data.civil.social.map(function(soc){%>
+              <%- include('formFieldsSocial' , {soc : soc}) -%>
+                <% }) %>
+          </div>
+
+          <div class="moreSocial-js">+</div>
+        </div>
+        <input type="submit" id="btnSubmit" value="save">
+      </form>
+
+      <a href="<%= path.admin %>">retour</a>
+</body>
+
+
+<%- include('../../parcial/javascript/global') -%>
+  <script>
+    $(document).ready(function () {
+      var formSocial = `<%- include('formFieldsSocial' , {soc : {name : "",value: ""}}) -%>`
+      $('.moreSocial-js').click(function (e) {
+        $('.social-js').append(formSocial)
+      });
+
+      $('.removeSocial-js').click(function (e) {
+        $(this).parent().remove()
+      });
+
+      $('#formCivil').submit(function (e) {
+        e.preventDefault();
+        let data = new FormData(document.getElementById('formCivil'));
+        console.log(data.get('profilsPath'));
+        data.append("_id", "<%= data._id %>");
+        $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "http://localhost:3000/admin/civils",
+          data: data,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 800000,
+          success: function (data) {
+            console.log("SUCCESS : ", data);
+            $("#btnSubmit").prop("disabled", false);
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+          }
+        });
+
+      })
+    })
+  </script>
+
+</html>

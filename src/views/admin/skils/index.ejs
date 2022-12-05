@@ -11,10 +11,12 @@
             <li><%= skils.uskCatTitle %>
               <ul>
                 <% skils.userSkils.map(function(skil) { %> 
+                  <img src="http://localhost:3000/<%= skil.uskImageUrl %>" alt="fdfdf" width="50" height="50">
                   <li><%= skil.uskTitle %><%= skil.uskValue %></li>  
                 <%})%>
               </ul>
               <a href="/admin/skils/edit/<%= skils.id %>">edit</a>
+              <a href="/admin/skils/delete/<%= skils.id %>">delete</a>
             </li>
         <% }) %>
     </ul>

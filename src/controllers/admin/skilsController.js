@@ -1,4 +1,5 @@
-const skilsEntity  = require("../../models/skilsEntity");
+const skilsEntity = require("../../models/skilsEntity");
+const { uploadFile } = require("../../services/uploadFile");
 const { method, path } = require("../../utils/constant")
 /**
  * @param {import("express").Request} req
@@ -25,14 +26,27 @@ const renderAddSkils = async (req, res, next) => {
  */
 const addSkils = async (req, res) => {
     const data = req.body;
+    const skilsPath = (req.files && Object.keys(req.files).length > 0) ? uploadFile(req.files["uskImageUrl[]"]) : {
+        data: undefined
+    }
     if (!data) return res.redirect(300, '/');
-    const porfolio = new skilsEntity({
-        usprTitle: data.title,
-        usprDescription: data.description,
-        usprImagePath: 'image url'
+    var userSkils = typeof data["uskTitle[]"] != "string" ? data["uskTitle[]"].map((element, index) => {
+        return {
+            uskImageUrl: skilsPath.data[index] ? skilsPath.data[index] : undefined,
+            uskTitle: element,
+            uskValue: data["uskValue[]"][index]
+        }
+    }) : [{
+        uskImageUrl: skilsPath.data,
+        uskTitle: data["uskTitle[]"],
+        uskValue: data["uskValue[]"]
+    }]
+    const skils = new skilsEntity({
+        userSkils,
+        uskCatTitle: data.title
     })
-    porfolio.save((err) => {
-        if (err) return res.status(500).send('ERROR');
+    skils.save((err) => {
+        if (err) return res.status(500).send(err);
         res.redirect(301, path.skils.index)
     })
 }
@@ -58,7 +72,7 @@ const editSkils = async (req, res) => {
     if (!req.params.id) res.status(404).send('skils not found')
     const data = req.body;
     if (!data) return res.render('./admin/skils/edit', { title: 'edit', data: docs, path: path });
-    const {modifiedCount} = await skilsEntity.updateOne({
+    const { modifiedCount } = await skilsEntity.updateOne({
         _id: req.params.id
     }, {
         usprTitle: data.title,
@@ -83,7 +97,7 @@ const remove = async (req, res) => {
 }
 
 
-module.exports= {
+module.exports = {
     index,
     renderAddSkils,
     addSkils,

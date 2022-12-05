@@ -28,7 +28,9 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
+app.use(fileUpload({
+  createParentPath:true
+}));
 app.use('/', require('./src/routes/frontOffice'));
 app.use('/admin' , require('./src/routes/backOffice'));
 
