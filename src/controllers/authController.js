@@ -26,7 +26,6 @@ const fecthLogin = async (req, res) => {
                 result ? res.redirect(301, `/admin`) : res.status(401).end();
             });
         } else {
-            console.log('ici');
             res.status(401).end();
         }
     })
