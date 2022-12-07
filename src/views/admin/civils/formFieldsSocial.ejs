@@ -1,7 +1,9 @@
 <div class="socialFieds">
-    <label for="socialName">name</label>
-    <input type="text" value="<%= soc.name %>" name="socialName[]" id="socialName">
-    <label for="value">value</label>
-    <input type="text" value="<%= soc.value %>" name="value[]" id="value">
-    <div class="removeSocial-js">-</div>
+    <div class="input-group input-group-outline mb-1">
+        <strong class="text-dark d-flex align-items-center" for="socialName">name : </strong>
+        <input class="form-control" type="text" value="<%= soc.name %>" name="socialName[]" id="socialName">
+        <strong class="text-dark d-flex align-items-center" for="value">/</strong>
+        <input class="form-control" type="text" value="<%= soc.value %>" name="value[]" id="value">
+    </div>
+    <button type="button" class="btn btn-sm w-100 removeSocial-js">remove</button>
 </div>

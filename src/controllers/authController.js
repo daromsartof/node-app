@@ -1,4 +1,5 @@
-const { method } = require("../utils/constant");
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const userEntity = require("../models/userEntity");
 
@@ -9,6 +10,12 @@ const userEntity = require("../models/userEntity");
 const login = async (req, res) => {
     res.render('./auth/index', { title: 'login' });
 }
+
+
+
+
+
+
 
 /**
  * @param {import("express").Request} req

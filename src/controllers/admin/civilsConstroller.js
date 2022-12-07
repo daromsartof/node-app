@@ -19,6 +19,7 @@ const index = async (req, res) => {
  */
 const updateCivil = async (req, res) => {
     const data = req.body;
+    console.log(data);
     if (!data) {
         res.status(401).json({
             message: "data not found"
